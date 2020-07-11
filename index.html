@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tip calculator</title>
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+  <div id="app" style="display: none;">
+    <div class="flex items-center justify-center h-screen">
+      <div id="border" class="flex items-center  border-b-2 py-2">
+        <input v-model="sum" style="max-width: 60px;"
+          class="border-none text-gray-700 py-1 focus:outline-none text-right" type="tel" :placeholder="placeholder">
+        <p class="flex-shrink-0 text-gray-700 mr-6">
+          &nbsp;&nbsp; + &nbsp;&nbsp;{{result - sum}}&nbsp;&nbsp; = &nbsp;&nbsp;<span
+            class="text-gray-800">{{result}}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      sum: '',
+      placeholder: Math.floor(Math.random() * Math.floor(999))
+    },
+    computed: {
+      result: function () {
+        return Math.ceil(this.sum * 1.1 / 10) * 10;
+      }
+    },
+    mounted: () => {
+      const colors = [
+        'border-teal-300',
+        'border-red-300',
+        'border-orange-300',
+        'border-yellow-300',
+        'border-green-300',
+        'border-blue-300',
+        'border-indigo-300',
+        'border-purple-300',
+        'border-pink-300',
+      ]
+      document.getElementById("border").classList.add(colors[colors.length * Math.random() | 0]);
+      document.getElementById("app").style.display = "block";
+    }
+  })
+</script>
+
+</html>
